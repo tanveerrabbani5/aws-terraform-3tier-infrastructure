@@ -81,3 +81,21 @@ resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
+
+
+resource "aws_route_table" "private_db" {
+  vpc_id = aws_vpc.this.id
+
+  tags = {
+    Name = "three-tier-${var.environment}-private-db-rt"
+    Tier = "Private-DB"
+  }
+}
+
+
+resource "aws_route_table_association" "private_db" {
+  count = length(var.private_db_subnet_cidrs)
+
+  subnet_id      = aws_subnet.private_db[count.index].id
+  route_table_id = aws_route_table.private_db.id
+}
