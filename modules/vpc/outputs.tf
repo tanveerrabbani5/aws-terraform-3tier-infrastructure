@@ -24,3 +24,10 @@ output "private_db_subnet_ids" {
   description = "IDs of the private database subnets"
   value       = aws_subnet.private_db[*].id
 }
+
+
+output "internet_gateway_ids" {
+  description = "IDs of the internet_gateway"
+  value       = aws_internet_gateway.this.id
+}
+

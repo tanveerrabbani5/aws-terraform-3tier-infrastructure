@@ -62,3 +62,8 @@ output "private_db_subnet_ids" {
   description = "Private database subnet IDs"
   value       = module.vpc.private_db_subnet_ids
 }
+
+output "internet_gateway_ids" {
+  description = "IDs of the internet_gateway"
+  value       = module.vpc.internet_gateway_ids
+}

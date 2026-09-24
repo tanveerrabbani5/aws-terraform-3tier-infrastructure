@@ -48,3 +48,12 @@ resource "aws_subnet" "private_db" {
     Tier = "Private-DB"
   }
 }
+
+
+resource "aws_internet_gateway" "this" {
+  vpc_id = aws_vpc.this.id
+
+  tags = {
+    Name = "three-tier-${var.environment}-igw"
+  }
+}
