@@ -30,6 +30,18 @@ module "vpc" {
   ]
 }
 
+
+##    Terraform Used this to Go-through the Security inside module
+
+module "security" {
+  source = "./modules/security"
+
+  vpc_id      = module.vpc.vpc_id
+  environment = var.environment
+}
+
+
+
 output "aws_account_id" {
   description = "AWS account ID being used by Terraform"
   value       = data.aws_caller_identity.current.account_id
