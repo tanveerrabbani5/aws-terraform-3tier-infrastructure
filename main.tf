@@ -41,6 +41,14 @@ module "security" {
 }
 
 
+##    Terraform Used this to Go-through the iam inside module
+
+module "iam" {
+  source = "./modules/iam"
+
+  environment = var.environment
+}
+
 
 output "aws_account_id" {
   description = "AWS account ID being used by Terraform"
@@ -78,4 +86,12 @@ output "private_db_subnet_ids" {
 output "internet_gateway_ids" {
   description = "IDs of the internet_gateway"
   value       = module.vpc.internet_gateway_ids
+}
+
+
+##    expose IAM ec2_instance_profile_name output
+
+output "ec2_instance_profile_name" {
+  description = "IAM instance profile name for EC2"
+  value       = module.iam.ec2_instance_profile_name
 }
