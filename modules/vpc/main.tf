@@ -117,3 +117,39 @@ resource "aws_route_table_association" "private_app" {
   subnet_id      = aws_subnet.private_app[count.index].id
   route_table_id = aws_route_table.private_app.id
 }
+
+
+## create Elastic IP
+
+resource "aws_eip" "nat" {
+  domain = "vpc"
+
+  tags = {
+    Name = "three-tier-${var.environment}-nat-eip"
+  }
+}
+
+
+##    Create Nat and attach Elastic-IP to a NAT
+
+resource "aws_nat_gateway" "this" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public[0].id
+
+  tags = {
+    Name = "three-tier-${var.environment}-nat"
+  }
+
+  depends_on = [
+    aws_internet_gateway.this
+  ]
+}
+
+
+##    Assign NAT to Private App route table
+
+resource "aws_route" "private_app_nat" {
+  route_table_id         = aws_route_table.private_app.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.this.id
+}
