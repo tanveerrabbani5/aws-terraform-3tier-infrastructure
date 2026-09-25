@@ -69,6 +69,21 @@ module "ec2" {
 }
 
 
+##    ALB module call
+
+module "alb" {
+  source = "./modules/alb"
+
+  environment = var.environment
+
+  vpc_id = module.vpc.vpc_id
+
+  public_subnet_ids = module.vpc.public_subnet_ids
+
+  security_group_id = module.security.alb_security_group_id
+}
+
+
 ##    Data AWS AMI To find current ubuntu AMI
 
 data "aws_ami" "ubuntu" {
@@ -154,3 +169,5 @@ output "app_private_ip" {
   description = "Private IP address of the application EC2 instance"
   value       = module.ec2.private_ip
 }
+
+
