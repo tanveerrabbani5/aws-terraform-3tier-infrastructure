@@ -50,6 +50,53 @@ module "iam" {
 }
 
 
+##    EC2 module call
+
+module "ec2" {
+  source = "./modules/ec2"
+
+  environment = var.environment
+
+  private_app_subnet_id = module.vpc.private_app_subnet_ids[0]
+
+  security_group_id = module.security.app_security_group_id
+
+  instance_profile_name = module.iam.ec2_instance_profile_name
+
+  instance_type = "t3.micro"
+
+  ami_id = data.aws_ami.ubuntu.id
+}
+
+
+##    Data AWS AMI To find current ubuntu AMI
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"]
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+}
+
+
 output "aws_account_id" {
   description = "AWS account ID being used by Terraform"
   value       = data.aws_caller_identity.current.account_id
