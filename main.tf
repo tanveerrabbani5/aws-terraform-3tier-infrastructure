@@ -142,3 +142,15 @@ output "ec2_instance_profile_name" {
   description = "IAM instance profile name for EC2"
   value       = module.iam.ec2_instance_profile_name
 }
+
+##    output for EC2 instance details
+
+output "app_instance_id" {
+  description = "Application EC2 instance ID"
+  value       = module.ec2.instance_id
+}
+
+output "app_private_ip" {
+  description = "Private IP address of the application EC2 instance"
+  value       = module.ec2.private_ip
+}
