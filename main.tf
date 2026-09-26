@@ -81,6 +81,8 @@ module "alb" {
   public_subnet_ids = module.vpc.public_subnet_ids
 
   security_group_id = module.security.alb_security_group_id
+
+  instance_id = module.ec2.instance_id
 }
 
 

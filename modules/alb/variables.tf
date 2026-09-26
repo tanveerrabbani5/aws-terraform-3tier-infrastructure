@@ -19,3 +19,11 @@ variable "security_group_id" {
   description = "Security group ID for the Application Load Balancer"
   type        = string
 }
+
+
+##    variable for Register the EC2 to the target group
+
+variable "instance_id" {
+  description = "ID of the application EC2 instance"
+  type        = string
+}
