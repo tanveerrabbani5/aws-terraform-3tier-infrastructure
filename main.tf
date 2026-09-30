@@ -192,3 +192,21 @@ output "app_private_ip" {
 }
 
 
+##    RDS outputs
+
+output "db_endpoint" {
+  description = "RDS database endpoint including port"
+  value       = module.rds.db_endpoint
+}
+
+output "db_address" {
+  description = "RDS database hostname"
+  value       = module.rds.db_address
+}
+
+output "db_port" {
+  description = "RDS database port"
+  value       = module.rds.db_port
+}
+
+
