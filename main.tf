@@ -55,6 +55,8 @@ module "iam" {
 module "ec2" {
   source = "./modules/ec2"
 
+  depends_on = [module.vpc]
+
   environment = var.environment
 
   private_app_subnet_id = module.vpc.private_app_subnet_ids[0]
@@ -83,6 +85,23 @@ module "alb" {
   security_group_id = module.security.alb_security_group_id
 
   instance_id = module.ec2.instance_id
+}
+
+##    RDS module call
+
+module "rds" {
+  source = "./modules/rds"
+
+  environment = var.environment
+
+  private_db_subnet_ids = module.vpc.private_db_subnet_ids
+
+  security_group_id = module.security.db_security_group_id
+
+  db_name        = "appdb"
+  db_username    = "appadmin"
+  db_password    = var.db_password
+  instance_class = "db.t3.micro"
 }
 
 

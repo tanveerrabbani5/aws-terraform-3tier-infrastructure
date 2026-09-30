@@ -9,3 +9,12 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+
+##     variable db_password
+
+variable "db_password" {
+  description = "Master password for the RDS database"
+  type        = string
+  sensitive   = true
+}

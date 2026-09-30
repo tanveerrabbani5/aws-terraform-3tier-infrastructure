@@ -12,3 +12,11 @@ output "alb_security_group_id" {
   description = "Security group ID for the Application Load Balancer"
   value       = aws_security_group.alb.id
 }
+
+
+##    RDS security id output
+
+output "db_security_group_id" {
+  description = "Security group ID for the database"
+  value       = aws_security_group.db.id
+}
