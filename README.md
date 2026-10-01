@@ -317,7 +317,7 @@ After destruction, verify in the AWS console that the ALB, EC2 instance, RDS ins
 B.Tech Information Technology | Cloud & DevOps Learner
 
 - GitHub: [@tanveerrabbani5](https://github.com/tanveerrabbani5)
-- LinkedIn: [Tanveer Rabbani](https://www.linkedin.com/in/tanveerrabbani-a-870729362/)
+- LinkedIn: [Tanveer Rabbani](https://www.linkedin.com/in/tanveer-rabbani-a-870729362/)
 
 ---
 
